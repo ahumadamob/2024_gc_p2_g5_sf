@@ -41,14 +41,6 @@ public class MetodosDePago {
 	}
 	public void setActivo(boolean activo) {
 		this.activo = activo;
-<<<<<<< HEAD
-	}
-
-		
-=======
 	} 
-	
-	
->>>>>>> 0859b4cadc35b028508e61cf240263dcc20bbbe6
 
 }
