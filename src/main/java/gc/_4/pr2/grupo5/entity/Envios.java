@@ -1,4 +1,5 @@
-package gc._4.pr2.grupo5.entity;
+
+import java.util.Date;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -6,11 +7,11 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
+
 @Entity
 @Table(name = "envios")
-
 public class Envios {
-
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -18,6 +19,8 @@ public class Envios {
 	private int fechaEnvio;
 	private String empresaTrasnporte;
 	private int numeroSeguimiento;
+	
+	
 	public Long getId() {
 		return id;
 	}
@@ -30,6 +33,7 @@ public class Envios {
 	public void setDireccionEnvio(String direccionEnvio) {
 		this.direccionEnvio = direccionEnvio;
 	}
+	
 	public int getFechaEnvio() {
 		return fechaEnvio;
 	}
@@ -48,7 +52,10 @@ public class Envios {
 	public void setNumeroSeguimiento(int numeroSeguimiento) {
 		this.numeroSeguimiento = numeroSeguimiento;
 	}
-
 	
+	
+	
+	
+
 
 }
