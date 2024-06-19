@@ -4,8 +4,12 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+
 
 @Entity
 @Table(name = "promocion")
@@ -24,9 +28,11 @@ public class Promocion {
     private Date fechaInicio;
 
     private Date fechaFinal;
-
-    // Getters and setters
     
+    @ManyToMany(mappedBy = "promociones")
+    private Set<Productos> productos = new HashSet<>();
+
+ 
     public Long getId() {
         return id;
     }
@@ -74,4 +80,13 @@ public class Promocion {
     public void setFechaFinal(Date fechaFinal) {
         this.fechaFinal = fechaFinal;
     }
+
+	public Set<Productos> getProductos() {
+		return getProductos();
+	}
+
+	public void setProductos(Set<Productos> productos) {
+		this.productos = productos;
+	}
+    
 }
