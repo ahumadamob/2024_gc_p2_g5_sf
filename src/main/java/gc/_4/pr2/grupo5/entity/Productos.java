@@ -1,9 +1,15 @@
 package gc._4.pr2.grupo5.entity;
 
+import jakarta.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -22,6 +28,15 @@ public class Productos {
 	private String cantidadStock;
 	private String imagenes;
 	
+	
+	@ManyToMany
+    @JoinTable(
+        name = "producto_promocion",
+        joinColumns = {@JoinColumn(name = "producto_id")},
+        inverseJoinColumns = {@JoinColumn(name = "promocion_id")}
+    )
+    private Set<Promocion> promociones = new HashSet<>();
+
 	public Long getId() {
 		return id;
 	}
@@ -76,5 +91,12 @@ public class Productos {
 	public void setImagenes(String imagenes) {
 		this.imagenes = imagenes;
 	}
+	public Set<Promocion> getPromociones() {
+		return promociones;
+	}
+	public void setPromociones(Set<Promocion> promociones) {
+		this.promociones = promociones;
+	}
+	
 	
 }
