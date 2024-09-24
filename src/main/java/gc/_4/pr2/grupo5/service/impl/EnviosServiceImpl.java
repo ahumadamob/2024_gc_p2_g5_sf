@@ -1,13 +1,13 @@
 package gc._4.pr2.grupo5.service.impl;
 
 import gc._4.pr2.grupo5.entity.Envios;
-import gc._4.pr2.grupo5.repository.EnviosRepository;
+import gc._4.pr2.grupo5.repo.EnviosRepository;
 import gc._4.pr2.grupo5.service.EnviosService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.NoSuchElementException;
 
 @Service
 public class EnviosServiceImpl implements EnviosService {
@@ -21,8 +21,9 @@ public class EnviosServiceImpl implements EnviosService {
     }
 
     @Override
-    public Optional<Envios> getEnvioById(Long id) {
-        return enviosRepository.findById(id);
+    public Envios getEnvioById(Long id) {
+        return enviosRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Envio no encontrado con id: " + id));
     }
 
     @Override
