@@ -32,10 +32,16 @@ public class EnviosController {
         return ResponseEntity.ok(updatedEnvio);
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Envios> updateEnvio(@PathVariable Long id, @RequestBody Envios envio) {
+        envio.setId(id); // Asegúrate de tener un método setId en tu entidad
+        Envios updatedEnvio = enviosService.createOrUpdateEnvio(envio);
+        return ResponseEntity.ok(updatedEnvio);
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteEnvio(@PathVariable Long id) {
         enviosService.deleteEnvio(id);
         return ResponseEntity.noContent().build();
     }
 }
-
