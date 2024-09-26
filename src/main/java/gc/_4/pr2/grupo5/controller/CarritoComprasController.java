@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import gc._4.pr2.grupo5.entity.CarritoCompras;
-import gc._4.pr2.grupo5.service.CarritoComprasService;
+import gc._4.pr2.grupo5.service.ICarritoComprasService;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ import java.util.List;
 @RequestMapping("/carrito")
 public class CarritoComprasController {
     @Autowired
-    private CarritoComprasService carritocomprasService;
+    private ICarritoComprasService carritocomprasService;
 
     @PostMapping
     public CarritoCompras crearCarritoCompras(@RequestBody CarritoCompras carritocompras) {
@@ -26,8 +26,19 @@ public class CarritoComprasController {
 
     @GetMapping("/{id}")
     public CarritoCompras obtenerCarritoComprasPorId(@PathVariable Long id) {
-        return carritocomprasService.obtenerCarritoComprasPorId(id).orElse(null);
+        return carritocomprasService.obtenerCarritoComprasPorId(id);
     }
+    
+    @PutMapping("/{id}")
+	public CarritoCompras actualizarCarritoCompras(@PathVariable Long id,
+	@RequestBody CarritoCompras carritocompras) {
+    	CarritoCompras carritocomprasExistente = carritocomprasService.obtenerCarritoComprasPorId(id);
+    	if (carritocomprasExistente != null) {
+    		return carritocomprasService.guardarCarritoCompras(carritocomprasExistente);
+    	} else {
+    		return null;
+    	}
+	}
 
     @DeleteMapping("/{id}")
     public void eliminarCarritoCompras(@PathVariable Long id) {

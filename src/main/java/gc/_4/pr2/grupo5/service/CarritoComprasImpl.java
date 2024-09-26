@@ -7,10 +7,9 @@ import gc._4.pr2.grupo5.entity.CarritoCompras;
 import gc._4.pr2.grupo5.repo.CarritoComprasRepository;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
-public class CarritoComprasImpl implements CarritoComprasService {
+public class CarritoComprasImpl implements ICarritoComprasService {
     @Autowired
     private CarritoComprasRepository carritocomprasRepository;
 
@@ -25,8 +24,8 @@ public class CarritoComprasImpl implements CarritoComprasService {
     }
 
     @Override
-    public Optional<CarritoCompras> obtenerCarritoComprasPorId(Long id) {
-        return carritocomprasRepository.findById(id);
+    public CarritoCompras obtenerCarritoComprasPorId(Long id) {
+        return carritocomprasRepository.findById(id).orElse(null);
     }
 
     @Override
