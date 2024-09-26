@@ -1,19 +1,18 @@
 package gc._4.pr2.grupo5.service.impl;
 
 import gc._4.pr2.grupo5.entity.Productos;
-import gc._4.pr2.grupo5.repository.ProductosRepository;
+import gc._4.pr2.grupo5.repo.ProductosRepository; // Cambiado a "repo"
 import gc._4.pr2.grupo5.service.ProductosService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ProductosServiceImpl implements ProductosService {
 
     @Autowired
-    private ProductosRepository productosRepository;
+    private ProductosRepository productosRepository; // Cambiado a "repo"
 
     @Override
     public List<Productos> getAllProductos() {
@@ -21,8 +20,9 @@ public class ProductosServiceImpl implements ProductosService {
     }
 
     @Override
-    public Optional<Productos> getProductoById(Long id) {
-        return productosRepository.findById(id);
+    public Productos getProductoById(Long id) {
+        return productosRepository.findById(id)
+                                  .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
     }
 
     @Override
@@ -32,21 +32,19 @@ public class ProductosServiceImpl implements ProductosService {
 
     @Override
     public Productos updateProducto(Long id, Productos productoDetails) {
-        Optional<Productos> producto = productosRepository.findById(id);
-        if (producto.isPresent()) {
-            Productos productoActualizado = producto.get();
-            productoActualizado.setNombre(productoDetails.getNombre());
-            productoActualizado.setDescripcion(productoDetails.getDescripcion());
-            productoActualizado.setCategoria(productoDetails.getCategoria());
-            productoActualizado.setPrecio(productoDetails.getPrecio());
-            productoActualizado.setTamaño(productoDetails.getTamaño());
-            productoActualizado.setColor(productoDetails.getColor());
-            productoActualizado.setCantidadStock(productoDetails.getCantidadStock());
-            productoActualizado.setImagenes(productoDetails.getImagenes());
-            return productosRepository.save(productoActualizado);
-        } else {
-            throw new RuntimeException("Producto no encontrado");
-        }
+        Productos producto = productosRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
+
+        producto.setNombre(productoDetails.getNombre());
+        producto.setDescripcion(productoDetails.getDescripcion());
+        producto.setCategoria(productoDetails.getCategoria());
+        producto.setPrecio(productoDetails.getPrecio());
+        producto.setTamaño(productoDetails.getTamaño());
+        producto.setColor(productoDetails.getColor());
+        producto.setCantidadStock(productoDetails.getCantidadStock());
+        producto.setImagenes(productoDetails.getImagenes());
+
+        return productosRepository.save(producto);
     }
 
     @Override

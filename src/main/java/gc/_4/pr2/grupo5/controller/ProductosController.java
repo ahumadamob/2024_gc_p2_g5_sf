@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/productos")
@@ -21,21 +20,17 @@ public class ProductosController {
         return productosService.getAllProductos();
     }
 
- 
     @GetMapping("/{id}")
     public ResponseEntity<Productos> getProductoById(@PathVariable Long id) {
-        Optional<Productos> producto = productosService.getProductoById(id);
-        return producto.map(ResponseEntity::ok)
-                       .orElseGet(() -> ResponseEntity.notFound().build());
+        Productos producto = productosService.getProductoById(id); // Cambiado de Optional a Productos
+        return ResponseEntity.ok(producto);
     }
-
 
     @PostMapping
     public Productos createProducto(@RequestBody Productos producto) {
         return productosService.createProducto(producto);
     }
 
-  
     @PutMapping("/{id}")
     public ResponseEntity<Productos> updateProducto(@PathVariable Long id, @RequestBody Productos producto) {
         try {
