@@ -42,14 +42,8 @@ public class InventarioController {
 	@PutMapping("/{id}")
 	public Inventario actualizarInventario(@PathVariable Long id,
 	@RequestBody Inventario inventario) {
-	Inventario inventarioExistente =
-	inventarioService.obtenerInventarioPorId(id).orElse(null);
-	if (inventarioExistente != null) {
-	return
-	inventarioService.guardarInventario(inventarioExistente);
-	} else {
-	return null;
-	}
+	return 
+	inventarioService.actualizarInventario(id, inventario);
 	}
 	
 	@DeleteMapping("/{id}")
