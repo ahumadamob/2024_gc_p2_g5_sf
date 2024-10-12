@@ -26,13 +26,13 @@ public class InventarioServiceImpl implements InventarioService {
 	}
 	@Override
 	public Inventario actualizarInventario(Long id, Inventario inventario) {
-			Inventario inventarioExistente =
-			inventarioRepository.findById(id).orElse(null);
-			if (inventarioExistente != null) {
-				return
-				inventarioRepository.save(inventarioExistente);
-				} else {
-				return null;
+	Inventario inventarioExistente =
+	inventarioRepository.findById(id).orElse(null);
+	if (inventarioExistente != null) {
+	return
+	inventarioRepository.save(inventarioExistente);
+	} else {
+	return null;
 				}
 				}
 	@Override
