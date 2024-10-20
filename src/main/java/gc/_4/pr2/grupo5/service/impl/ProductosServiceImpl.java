@@ -12,7 +12,7 @@ import java.util.List;
 public class ProductosServiceImpl implements ProductosService {
 
     @Autowired
-    private ProductosRepository productosRepository; // Cambiado a "repo"
+    private ProductosRepository productosRepository;
 
     @Override
     public List<Productos> getAllProductos() {
@@ -32,19 +32,12 @@ public class ProductosServiceImpl implements ProductosService {
 
     @Override
     public Productos updateProducto(Long id, Productos productoDetails) {
-        Productos producto = productosRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
-
-        producto.setNombre(productoDetails.getNombre());
-        producto.setDescripcion(productoDetails.getDescripcion());
-        producto.setCategoria(productoDetails.getCategoria());
-        producto.setPrecio(productoDetails.getPrecio());
-        producto.setTamaño(productoDetails.getTamaño());
-        producto.setColor(productoDetails.getColor());
-        producto.setCantidadStock(productoDetails.getCantidadStock());
-        producto.setImagenes(productoDetails.getImagenes());
-
-        return productosRepository.save(producto);
+        if (productosRepository.existsById(id)) {
+            productoDetails.setId(id);
+            return productosRepository.save(productoDetails);
+        } else {
+            throw new RuntimeException("Producto no encontrado");
+        }
     }
 
     @Override
@@ -56,3 +49,4 @@ public class ProductosServiceImpl implements ProductosService {
         }
     }
 }
+
