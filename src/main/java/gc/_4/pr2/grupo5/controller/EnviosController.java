@@ -23,9 +23,12 @@ public class EnviosController {
     @GetMapping("/{id}")
     public ResponseEntity<Envios> getEnvioById(@PathVariable Long id) {
         Envios envio = enviosService.getEnvioById(id);
+<<<<<<< HEAD
         if (envio == null) {
             return ResponseEntity.notFound().build();
         }
+=======
+>>>>>>> 4ce691f84feaa2586d2609d6fad457b574e1b24b
         return ResponseEntity.ok(envio);
     }
 
@@ -35,20 +38,29 @@ public class EnviosController {
         return ResponseEntity.ok(updatedEnvio);
     }
 
+<<<<<<< HEAD
     @PutMapping
     public ResponseEntity<Envios> updateEnvio(@RequestBody Envios envio) {
         if (enviosService.getEnvioById(envio.getId()) == null) {
             return ResponseEntity.notFound().build();
         }
+=======
+    @PutMapping("/{id}")
+    public ResponseEntity<Envios> updateEnvio(@PathVariable Long id, @RequestBody Envios envio) {
+        envio.setId(id); // Asegúrate de tener un método setId en tu entidad
+>>>>>>> 4ce691f84feaa2586d2609d6fad457b574e1b24b
         Envios updatedEnvio = enviosService.createOrUpdateEnvio(envio);
         return ResponseEntity.ok(updatedEnvio);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteEnvio(@PathVariable Long id) {
+<<<<<<< HEAD
         if (enviosService.getEnvioById(id) == null) {
             return ResponseEntity.notFound().build();
         }
+=======
+>>>>>>> 4ce691f84feaa2586d2609d6fad457b574e1b24b
         enviosService.deleteEnvio(id);
         return ResponseEntity.noContent().build();
     }
