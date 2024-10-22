@@ -1,7 +1,7 @@
 package gc._4.pr2.grupo5.service.impl;
 
 import gc._4.pr2.grupo5.entity.Productos;
-import gc._4.pr2.grupo5.repo.ProductosRepository; // Cambiado a "repo"
+import gc._4.pr2.grupo5.repo.ProductosRepository;
 import gc._4.pr2.grupo5.service.ProductosService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,7 +22,7 @@ public class ProductosServiceImpl implements ProductosService {
     @Override
     public Productos getProductoById(Long id) {
         return productosRepository.findById(id)
-                                  .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
+                .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
     }
 
     @Override
@@ -32,12 +32,10 @@ public class ProductosServiceImpl implements ProductosService {
 
     @Override
     public Productos updateProducto(Long id, Productos productoDetails) {
-        if (productosRepository.existsById(id)) {
-            productoDetails.setId(id);
-            return productosRepository.save(productoDetails);
-        } else {
+        if (!productosRepository.existsById(productoDetails.getId())) {
             throw new RuntimeException("Producto no encontrado");
         }
+        return productosRepository.save(productoDetails);
     }
 
     @Override
