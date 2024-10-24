@@ -1,8 +1,6 @@
 package gc._4.pr2.grupo5.service;
 
 import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import gc._4.pr2.grupo5.entity.Inventario;
@@ -21,20 +19,15 @@ public class InventarioServiceImpl implements InventarioService {
 	return inventarioRepository.findAll();
 	}
 	@Override
-	public Optional<Inventario> obtenerInventarioPorId(Long id) {
-	return inventarioRepository.findById(id);
+	public Inventario obtenerInventarioPorId(Long id) {
+	return inventarioRepository.findById(id).orElse(null);
 	}
 	@Override
 	public Inventario actualizarInventario(Long id, Inventario inventario) {
-	Inventario inventarioExistente =
-	inventarioRepository.findById(id).orElse(null);
-	if (inventarioExistente != null) {
-	return
-	inventarioRepository.save(inventarioExistente);
-	} else {
-	return null;
-				}
-				}
+	 Inventario inventarioExistente = inventarioRepository.findById(id).get();  
+     inventarioExistente.setId(inventario.getId());
+     return inventarioRepository.save(inventarioExistente);
+ }
 	@Override
 	public void eliminarInventario(Long id) {
 	inventarioRepository.deleteById(id);
