@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,7 +19,7 @@ import gc._4.pr2.grupo5.service.MetodosDePagoService;
 @RequestMapping("/MetodosDePago")
 public class MetodosDePagoController {
 	@Autowired
-	private  MetodosDePagoService metododepagoService;
+	private  MetodosDePagoService metodosdepagoService;
 	
 	@PostMapping
 	public MetodosDePago crearMetodosDePago(@RequestBody MetodosDePago metodosdepago) {
@@ -34,9 +35,13 @@ public class MetodosDePagoController {
 		return metodosdepagoService.obtenerMetodosDePagoPorId(id).orElse(null);
 	}
 	
+	@PutMapping("/{id}")
+	public MetodosDePago actualizarMetodosDePago(@PathVariable Long id, @RequestBody MetodosDePago metodosdepago) {
+	return metodosdepagoService.actualizarMetodosDePago(id, metodosdepago);
+	}
+	
 	@DeleteMapping("/{id}")
-	public void eliminarMetodosDePago(@PathVariable Long id) 
-	{
+	public void eliminarMetodosDePago(@PathVariable Long id) {
 		metodosdepagoService.eliminarMetodosDePago(id);
 	}
 	
