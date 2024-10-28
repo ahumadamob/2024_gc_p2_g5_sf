@@ -7,10 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-<<<<<<< HEAD
-=======
-import java.util.NoSuchElementException;
->>>>>>> 4ce691f84feaa2586d2609d6fad457b574e1b24b
 
 @Service
 public class EnviosServiceImpl implements EnviosService {
@@ -25,12 +21,7 @@ public class EnviosServiceImpl implements EnviosService {
 
     @Override
     public Envios getEnvioById(Long id) {
-<<<<<<< HEAD
         return enviosRepository.findById(id).orElse(null);
-=======
-        return enviosRepository.findById(id)
-                .orElseThrow(() -> new NoSuchElementException("Envio no encontrado con id: " + id));
->>>>>>> 4ce691f84feaa2586d2609d6fad457b574e1b24b
     }
 
     @Override
