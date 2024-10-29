@@ -7,6 +7,6 @@ public interface ProductosService {
     List<Productos> getAllProductos();
     Productos getProductoById(Long id);
     Productos createProducto(Productos producto);
-    Productos updateProducto(Long id, Productos producto);
+    Productos saveProducto(Productos producto); // Cambiado de updateProducto a saveProducto
     void deleteProducto(Long id);
 }

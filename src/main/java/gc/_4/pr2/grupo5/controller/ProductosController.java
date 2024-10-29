@@ -22,7 +22,7 @@ public class ProductosController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Productos> getProductoById(@PathVariable Long id) {
-        Productos producto = productosService.getProductoById(id); // Cambiado de Optional a Productos
+        Productos producto = productosService.getProductoById(id); // Se mantiene como Productos, no Optional
         return ResponseEntity.ok(producto);
     }
 
@@ -31,10 +31,12 @@ public class ProductosController {
         return productosService.createProducto(producto);
     }
 
+    // Cambiado de updateProducto a saveProducto
     @PutMapping("/{id}")
-    public ResponseEntity<Productos> updateProducto(@PathVariable Long id, @RequestBody Productos producto) {
+    public ResponseEntity<Productos> saveProducto(@PathVariable Long id, @RequestBody Productos productoDetails) {
         try {
-            return ResponseEntity.ok(productosService.updateProducto(id, producto));
+            productoDetails.setId(id); // Establece el id recibido en la URL en el objeto productoDetails
+            return ResponseEntity.ok(productosService.saveProducto(productoDetails));
         } catch (RuntimeException e) {
             return ResponseEntity.notFound().build();
         }
@@ -50,3 +52,4 @@ public class ProductosController {
         }
     }
 }
+

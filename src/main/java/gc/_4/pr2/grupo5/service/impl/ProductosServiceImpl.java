@@ -1,7 +1,7 @@
 package gc._4.pr2.grupo5.service.impl;
 
 import gc._4.pr2.grupo5.entity.Productos;
-import gc._4.pr2.grupo5.repo.ProductosRepository;
+import gc._4.pr2.grupo5.repo.ProductosRepository; // Cambiado a "repo"
 import gc._4.pr2.grupo5.service.ProductosService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,7 +22,7 @@ public class ProductosServiceImpl implements ProductosService {
     @Override
     public Productos getProductoById(Long id) {
         return productosRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
+                                  .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
     }
 
     @Override
@@ -30,12 +30,22 @@ public class ProductosServiceImpl implements ProductosService {
         return productosRepository.save(producto);
     }
 
+    // Reemplazo de updateProducto por saveProducto
     @Override
-    public Productos updateProducto(Long id, Productos productoDetails) {
-        if (!productosRepository.existsById(productoDetails.getId())) {
-            throw new RuntimeException("Producto no encontrado");
-        }
-        return productosRepository.save(productoDetails);
+    public Productos saveProducto(Productos productoDetails) {
+        Productos producto = productosRepository.findById(productoDetails.getId())
+                .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
+
+        producto.setNombre(productoDetails.getNombre());
+        producto.setDescripcion(productoDetails.getDescripcion());
+        producto.setCategoria(productoDetails.getCategoria());
+        producto.setPrecio(productoDetails.getPrecio());
+        producto.setTamaño(productoDetails.getTamaño());
+        producto.setColor(productoDetails.getColor());
+        producto.setCantidadStock(productoDetails.getCantidadStock());
+        producto.setImagenes(productoDetails.getImagenes());
+
+        return productosRepository.save(producto);
     }
 
     @Override
@@ -47,4 +57,3 @@ public class ProductosServiceImpl implements ProductosService {
         }
     }
 }
-
