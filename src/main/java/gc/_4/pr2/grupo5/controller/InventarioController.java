@@ -36,7 +36,7 @@ public class InventarioController {
 	public Inventario obtenerInventarioPorId(@PathVariable Long
 	id) {
 	return
-	inventarioService.obtenerInventarioPorId(id).orElse(null);
+	inventarioService.obtenerInventarioPorId(id);
 	}
 	
 	@PutMapping("/{id}")
