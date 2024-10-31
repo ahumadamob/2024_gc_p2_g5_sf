@@ -32,7 +32,7 @@ public class MetodosDePagoController {
 	}
 	@GetMapping("/{id}")
 	public MetodosDePago obtenerMetodosDePagoPorId(@PathVariable Long id) {
-		return metodosdepagoService.obtenerMetodosDePagoPorId(id).orElse(null);
+		return metodosdepagoService.obtenerMetodosDePagoPorId(id);
 	}
 	
 	@PutMapping("/{id}")
