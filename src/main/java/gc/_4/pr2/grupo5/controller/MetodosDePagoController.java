@@ -36,7 +36,8 @@ public class MetodosDePagoController {
 	}
 	
 	@PutMapping("/{id}")
-	public MetodosDePago actualizarMetodosDePago(@PathVariable Long id, @RequestBody MetodosDePago metodosdepago) {
+	public MetodosDePago actualizarMetodosDePago(@PathVariable Long id, 
+	@RequestBody MetodosDePago metodosdepago) {
 	return metodosdepagoService.actualizarMetodosDePago(id, metodosdepago);
 	}
 	
