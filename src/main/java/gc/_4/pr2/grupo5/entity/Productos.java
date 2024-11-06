@@ -14,6 +14,7 @@ public class Productos {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	private String nombre;
+	// este es el ejemplo de encapsulamiento, como nombre es private no se puede acceder en forma directa.
 	private String descripcion;
 	private String categoria;
 	private String precio;
@@ -31,9 +32,11 @@ public class Productos {
 	public String getNombre() {
 		return nombre;
 	}
+	// este es el getter del atributo encapsulado
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+	// este es el setter del atributo encapsulado
 	public String getDescripcion() {
 		return descripcion;
 	}

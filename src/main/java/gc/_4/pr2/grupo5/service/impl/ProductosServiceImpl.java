@@ -21,8 +21,7 @@ public class ProductosServiceImpl implements ProductosService {
 
     @Override
     public Productos getProductoById(Long id) {
-        return productosRepository.findById(id)
-                                  .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
+        return productosRepository.findById(id).get();
     }
 
     @Override
@@ -33,8 +32,7 @@ public class ProductosServiceImpl implements ProductosService {
     // Reemplazo de updateProducto por saveProducto
     @Override
     public Productos saveProducto(Productos productoDetails) {
-        Productos producto = productosRepository.findById(productoDetails.getId())
-                .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
+        Productos producto = productosRepository.findById(productoDetails.getId()).get();
 
         producto.setNombre(productoDetails.getNombre());
         producto.setDescripcion(productoDetails.getDescripcion());
@@ -50,10 +48,18 @@ public class ProductosServiceImpl implements ProductosService {
 
     @Override
     public void deleteProducto(Long id) {
-        if (productosRepository.existsById(id)) {
-            productosRepository.deleteById(id);
-        } else {
-            throw new RuntimeException("Producto no encontrado");
-        }
+        productosRepository.deleteById(id);
     }
-}
+
+    @Override
+	public boolean existe(Long id) {
+		if(id == null) {
+			return false;
+		}else {
+			return productosRepository.existsById(id);
+		}
+	}
+
+    
+
+}   

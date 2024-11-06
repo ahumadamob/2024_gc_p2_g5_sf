@@ -9,4 +9,5 @@ public interface ProductosService {
     Productos createProducto(Productos producto);
     Productos saveProducto(Productos producto); // Cambiado de updateProducto a saveProducto
     void deleteProducto(Long id);
+    public boolean existe(Long id);
 }
