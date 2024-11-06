@@ -7,7 +7,8 @@ public interface InventarioService {
 	Inventario guardarInventario(Inventario inventario);
 	List<Inventario> obtenerTodosLosInventarios();
 	Inventario obtenerInventarioPorId(Long id);
-	Inventario actualizarInventario(Long id, Inventario inventario);
+	Inventario  crearInventario(Inventario inventario);
+	public boolean existe(Long id); //Cambiado de actualizarProducto a existe
 	void eliminarInventario(Long id);
 
 }
