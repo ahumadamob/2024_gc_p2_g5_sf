@@ -7,13 +7,15 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "carrito_compras")
+@Table(name = "carritocompras")
 public class CarritoCompras {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
     
+    
+    private Long id;
+    //Ejemplo de ENCAPSULAMIENTO (Atributos privados, se restringe el acceso directo)
     private String usuario;
     
     private String productosAnadidos;
@@ -21,8 +23,8 @@ public class CarritoCompras {
     private int cantidad;
     
     private double precioTotal;
-
-    // Getters and setters
+    
+    //Ejemplos de getters y setters dentro de la clase
     
     public Long getId() {
         return id;
