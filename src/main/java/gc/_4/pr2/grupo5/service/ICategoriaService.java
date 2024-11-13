@@ -1,10 +1,7 @@
 package gc._4.pr2.grupo5.service;
 
 import java.util.List;
-
 import gc._4.pr2.grupo5.entity.Categoria;
-
-
 
 public interface ICategoriaService {
     
@@ -17,4 +14,7 @@ public interface ICategoriaService {
     Categoria update(Long id, Categoria categoria);  
 
     void delete(Long id);
+
+    boolean existsById(Long id);
 }
+
