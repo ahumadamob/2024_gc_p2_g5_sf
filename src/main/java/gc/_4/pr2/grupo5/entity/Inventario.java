@@ -16,7 +16,7 @@ public class Inventario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    //Encapsulamiento: El acceso y visibilidad es limitado
     private String producto;
     private int cantidadStock;
     private int umbralReabastecimiento;
@@ -32,7 +32,7 @@ public class Inventario {
     }
 
     // Getters y setters
-
+	
     public Long getId() {
         return id;
     }
