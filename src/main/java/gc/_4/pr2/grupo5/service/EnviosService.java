@@ -9,4 +9,5 @@ public interface EnviosService {
     Envios getEnvioById(Long id);
     Envios createOrUpdateEnvio(Envios envio);
     void deleteEnvio(Long id);
+    boolean exists(Long id);
 }
