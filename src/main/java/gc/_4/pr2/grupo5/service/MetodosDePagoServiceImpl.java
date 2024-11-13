@@ -9,6 +9,7 @@ import gc._4.pr2.grupo5.repo.MetodosDePagoRepository;
 
 @Service
 public class MetodosDePagoServiceImpl implements MetodosDePagoService {
+	
 	@Autowired
 	private MetodosDePagoRepository metodosdepagoRepository;
 	
@@ -40,5 +41,19 @@ public class MetodosDePagoServiceImpl implements MetodosDePagoService {
 	@Override
 	public void eliminarMetodosDePago(Long id) {
 		metodosdepagoRepository.deleteById(id);
+	}
+	
+	@Override
+	public boolean existe(Long id) {
+		if(id == null) {
+			return false;
+		}else {
+			return metodosdepagoRepository.existsById(id);
+		}
+	}
+	
+	@Override
+	public MetodosDePago crearMetodosDePago(MetodosDePago metodosdepago) {
+		return metodosdepagoRepository.save(metodosdepago);
 	}
 }

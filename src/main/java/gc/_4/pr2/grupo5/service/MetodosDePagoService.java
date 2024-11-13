@@ -8,5 +8,7 @@ public interface MetodosDePagoService {
 	List<MetodosDePago> obtenerTodosLosMetodosDePago();
 	MetodosDePago obtenerMetodosDePagoPorId(Long id);
 	MetodosDePago actualizarMetodosDePago (Long id, MetodosDePago metodosdepago);
+	MetodosDePago crearMetodosDePago(MetodosDePago metodosdepago);
+	public boolean existe(Long id);
 	void eliminarMetodosDePago(Long id);
 }
