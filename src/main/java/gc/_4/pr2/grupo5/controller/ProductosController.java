@@ -6,50 +6,95 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import dto.RespuestaDTO;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/productos")
 public class ProductosController {
 
     @Autowired
     private ProductosService productosService;
 
-    @GetMapping
-    public List<Productos> getAllProductos() {
-        return productosService.getAllProductos();
+    //buscar todos los productos
+    @GetMapping("/productos")
+    public RespuestaDTO <List<Productos>> getAllProductos() { 
+        List <Productos> listaProductos;
+        listaProductos = new ArrayList();
+        listaProductos = productosService.getAllProductos();
+
+        RespuestaDTO <List<Productos>> dto;
+        dto = new RespuestaDTO<List<Productos>>();
+
+        if (listaProductos.isEmpty()){
+            dto.setEstado(false);
+            List<String> mensajes = new ArrayList<>();
+            mensajes.add("No hay productos");
+            dto.setData(null);
+        }else{
+            List<String> mensajes = new ArrayList<>();
+            mensajes.add("Salio todo bien.");
+            mensajes.add("Se encontraron los siguientes productos:");
+            dto.setEstado(true);
+            dto.setMensaje(mensajes);
+            dto.setData(listaProductos);
+        }
+
+        return dto;
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Productos> getProductoById(@PathVariable Long id) {
-        Productos producto = productosService.getProductoById(id); // Se mantiene como Productos, no Optional
-        return ResponseEntity.ok(producto);
+    //buscar producto por id
+    @GetMapping("/productos/{id}")
+    public RespuestaDTO<Productos> getProductoById(@PathVariable ("id") Long id) {
+        if(productosService.existe(id)) {
+			Productos producto = new Productos();
+            // En esta linea se instancia un producto
+			producto = productosService.getProductoById(id);
+            // En esta linea se inicializa un producto
+			RespuestaDTO<Productos> dto;
+			dto = new RespuestaDTO<Productos>(true, "Se encontro el siguiente producto: ", producto);
+			return dto;
+        }else{
+            return new RespuestaDTO<Productos>(false, "No existen productos con el id: " + id, null);
+        }
+
+
     }
 
-    @PostMapping
-    public Productos createProducto(@RequestBody Productos producto) {
-        return productosService.createProducto(producto);
-    }
 
-    // Cambiado de updateProducto a saveProducto
-    @PutMapping("/{id}")
-    public ResponseEntity<Productos> saveProducto(@PathVariable Long id, @RequestBody Productos productoDetails) {
-        try {
-            productoDetails.setId(id); // Establece el id recibido en la URL en el objeto productoDetails
-            return ResponseEntity.ok(productosService.saveProducto(productoDetails));
-        } catch (RuntimeException e) {
-            return ResponseEntity.notFound().build();
+    // Crear un nuevo producto
+    @PostMapping("/productos")
+    public RespuestaDTO<Productos> createProducto(@RequestBody Productos producto) {
+        if (productosService.existe(producto.getId())) {
+            return new RespuestaDTO<Productos>(false, "El id ingresado ya existe", null);
+        } else {
+            return new RespuestaDTO<Productos>(true, "Producto creado con éxito", productosService.createProducto(producto));
         }
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteProducto(@PathVariable Long id) {
-        try {
+
+    //Actualizar un producto
+    @PutMapping("/productos")
+    public RespuestaDTO<Productos> saveProducto(@RequestBody Productos producto) {
+        if (productosService.existe(producto.getId())) {
+            return new RespuestaDTO<Productos>(true, "Producto actualizado con éxito", productosService.saveProducto(producto));
+        }else{
+            return new RespuestaDTO<Productos>(false, "No existen productos con el id: " + producto.getId().toString(), null);
+        }
+    }
+
+
+    // Eliminar un producto por id
+    @DeleteMapping("/productos/{id}")
+    public RespuestaDTO<?> deleteProducto(@PathVariable ("id") Long id) {
+        if (productosService.existe(id)) {
             productosService.deleteProducto(id);
-            return ResponseEntity.noContent().build();
-        } catch (RuntimeException e) {
-            return ResponseEntity.notFound().build();
+            return new RespuestaDTO<>(true, "Producto con id: " + id.toString() + " eliminado con éxito", null);
+        }else{
+            return new RespuestaDTO<>(false, "No existen productos con el id: " + id.toString(), null);
         }
+        
     }
 }
 
