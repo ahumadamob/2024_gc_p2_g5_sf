@@ -96,5 +96,41 @@ public class ProductosController {
         }
         
     }
+
+
+    // encontrar por destacado 
+    @GetMapping("/productos/destacados")
+    public RespuestaDTO<List<Productos>> getDestacados() {
+
+        List <Productos> listaProductos;
+        listaProductos = new ArrayList();
+        listaProductos = productosService.findByDestacado(true);
+        RespuestaDTO <List<Productos>> dto;
+        dto = new RespuestaDTO<List<Productos>>();
+        if (listaProductos.isEmpty()){
+            dto.setEstado(false);
+            List<String> mensajes = new ArrayList<>();
+            mensajes.add("No hay productos");
+            dto.setData(null);
+        }else{
+            List<String> mensajes = new ArrayList<>();
+            mensajes.add("Salio todo bien.");
+            mensajes.add("Se encontraron los siguientes productos:");
+            dto.setEstado(true);
+            dto.setMensaje(mensajes);
+            dto.setData(listaProductos);
+        }
+
+        return dto;
+
+        }
+
+    
+
+     
+
+
+
+
 }
 

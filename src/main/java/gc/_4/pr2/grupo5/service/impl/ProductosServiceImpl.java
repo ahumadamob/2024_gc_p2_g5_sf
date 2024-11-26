@@ -60,6 +60,11 @@ public class ProductosServiceImpl implements ProductosService {
 		}
 	}
 
+    @Override
+    public List<Productos> findByDestacado(boolean destacado) {
+        return productosRepository.findByDestacado(destacado);
+    }
+
     
 
 }   
