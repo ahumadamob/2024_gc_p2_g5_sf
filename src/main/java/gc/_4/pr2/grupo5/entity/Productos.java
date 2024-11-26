@@ -22,7 +22,17 @@ public class Productos {
 	private String color;
 	private String cantidadStock;
 	private String imagenes;
+	private boolean destacado; // nueva propiedad agregada
 	
+	// getters and setters generado para destacado
+	public boolean isDestacado() {
+		return destacado;
+	}
+	public void setDestacado(boolean destacado) {
+		this.destacado = destacado;
+	}
+
+
 	public Long getId() {
 		return id;
 	}
