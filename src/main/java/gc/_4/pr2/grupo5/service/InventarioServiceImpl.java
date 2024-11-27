@@ -50,7 +50,7 @@ public class InventarioServiceImpl implements InventarioService {
 	
 	@Override
 	public List<Inventario> findByRequiereReabastecimiento(boolean requiereReabastecimiento) {
-		return inventarioRepository.findAll();
+		return inventarioRepository.findByRequiereReabastecimiento(requiereReabastecimiento);
 		}
 }
 		
