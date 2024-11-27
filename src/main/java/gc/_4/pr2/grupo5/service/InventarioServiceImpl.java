@@ -47,5 +47,10 @@ public class InventarioServiceImpl implements InventarioService {
 	public Inventario crearInventario(Inventario inventario) {
 		return inventarioRepository.save(inventario);
 	}
+	
+	@Override
+	public List<Inventario> findByRequiereReabastecimiento(boolean requiereReabastecimiento) {
+		return inventarioRepository.findAll();
+		}
 }
 		

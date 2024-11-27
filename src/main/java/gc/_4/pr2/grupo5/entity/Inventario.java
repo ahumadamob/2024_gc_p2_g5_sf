@@ -20,9 +20,14 @@ public class Inventario {
     private String producto;
     private int cantidadStock;
     private int umbralReabastecimiento;
-    
+    private boolean requiereReabastecimiento;
   
-    @OneToOne
+
+
+
+	
+
+	@OneToOne
     @JoinColumn(name = "producto_id")  // Nombre de la columna que actúa como clave foránea
     private Productos productoRelacion;
     
@@ -72,6 +77,14 @@ public class Inventario {
 
 	public void setProductoRelacion(Productos productoRelacion) {
 		this.productoRelacion = productoRelacion;
+	}
+	
+	public boolean isRequiereReabastecimiento() {
+		return requiereReabastecimiento;
+	}
+
+	public void setRequiereReabastecimiento(boolean requiereReabastecimiento) {
+		this.requiereReabastecimiento = requiereReabastecimiento;
 	}
 }
 

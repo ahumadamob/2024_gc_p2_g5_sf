@@ -101,5 +101,28 @@ public class InventarioController {
 			return new RespuestaDTO<>(false, "No se encontró inventario con el ID: " + id.toString(), null);
 		}
 	}
-
+	@GetMapping("/inventario/requieren-reabastecimiento")
+	public RespuestaDTO<List<Inventario>> findByRequiereReabastecimiento(boolean requiereReabastecimiento) {
+		List<Inventario> listaInventario;
+		listaInventario = new ArrayList<Inventario>();
+		listaInventario = inventarioService.obtenerTodosLosInventarios();
+		
+		RespuestaDTO<List<Inventario>> dto;
+		 dto = new RespuestaDTO<List<Inventario>>();
+		
+		if(listaInventario.isEmpty()) {
+			dto.setEstado(false);
+			List<String> mensajes = new ArrayList<>();
+			mensajes.add("Requiere reabastecimiento");
+			dto.setData(null);
+		} else {
+			List<String> mensajes = new ArrayList<>();
+			mensajes.add("Salió todo bien");
+			mensajes.add("Se encontraron los siguientes inventarios: ");
+			dto.setEstado(true);
+			dto.setMensaje(mensajes);
+			dto.setData(listaInventario);
+		}
+		return dto;
+	}
 }
