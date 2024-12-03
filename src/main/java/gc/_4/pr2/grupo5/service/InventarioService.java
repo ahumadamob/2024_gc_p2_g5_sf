@@ -10,5 +10,7 @@ public interface InventarioService {
 	Inventario  crearInventario(Inventario inventario);
 	public boolean existe(Long id); //Cambiado de actualizarProducto a existe
 	void eliminarInventario(Long id);
+	List<Inventario> findByRequiereReabastecimiento(boolean requiereReabastecimiento);
+	
 
 }
