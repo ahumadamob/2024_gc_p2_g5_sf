@@ -16,6 +16,15 @@ public class MetodosDePago {
 	private String tipoMetodo;
 	private String detallesMetodoPago;
 	private boolean activo;
+	private double limiteMonto; //Nuevo atributo
+	
+	//Getters y setters del nuevo atributo
+	public double getLimiteMonto() {
+		return limiteMonto;
+	}
+	public void setLimiteMonto(double limiteMonto) {
+		this.limiteMonto = limiteMonto;
+	}
 	
 	//Getters y Setters
 	public Long getId() {
