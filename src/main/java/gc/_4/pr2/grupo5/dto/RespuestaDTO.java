@@ -7,16 +7,6 @@ public class RespuestaDTO<T> {
 	private boolean estado; //true exitoso
 	private List<String> mensaje;
 	private T data;
-	private double limiteMonto;
-	
-	//Getters y setters
-	public double getLimiteMonto() {
-		return limiteMonto;
-	}
-
-	public void setLimiteMonto(double limiteMonto) {
-		this.limiteMonto = limiteMonto;
-	}
 
 	public boolean isEstado() {
 		return estado;
