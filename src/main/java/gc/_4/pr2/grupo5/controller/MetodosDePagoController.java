@@ -93,4 +93,13 @@ public class MetodosDePagoController {
 			return new RespuestaDTO<>(false, "No se elimino el metodo de pago con el ID: " + id.toString(), null);
 		}
 	}
+	
+	@PostMapping("/{metodosdepago}")
+	public RespuestaDTO<?> crearMetodosDePago1(@RequestBody MetodosDePago metodosdepago) {
+		if (metodosdepago.getLimiteMonto() <1000.00) {
+		return new RespuestaDTO<MetodosDePago>(false, "El límite de monto debe ser mayor o igual a 1000.00", metodosdepago);
+		} else {
+			return new RespuestaDTO<MetodosDePago>(true, "Metodo de pago creado con exito", metodosdepagoService.guardarMetodosDePago(metodosdepago));
+		}
+	}
 }

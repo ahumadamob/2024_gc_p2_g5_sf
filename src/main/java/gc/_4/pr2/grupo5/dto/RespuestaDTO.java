@@ -7,6 +7,7 @@ public class RespuestaDTO<T> {
 	private boolean estado; //true exitoso
 	private List<String> mensaje;
 	private T data;
+
 	public boolean isEstado() {
 		return estado;
 	}
