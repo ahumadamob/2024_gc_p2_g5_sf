@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import gc._4.pr2.grupo5.entity.CarritoCompras;
+import gc._4.pr2.grupo5.entity.Productos;
 import gc._4.pr2.grupo5.repo.CarritoComprasRepository;
 
 import java.util.List;
@@ -41,4 +42,6 @@ public class CarritoComprasImpl implements ICarritoComprasService {
    			return carritocomprasRepository.existsById(id);
    		}
    	}
+    
 }
+    

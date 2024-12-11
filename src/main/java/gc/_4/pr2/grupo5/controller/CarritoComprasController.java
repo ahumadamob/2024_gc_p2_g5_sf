@@ -92,4 +92,14 @@ public class CarritoComprasController {
 		}
 		
 	}
+     
+    @PostMapping("/carrito/crear") 
+    public RespuestaDTO<CarritoCompras> verificarCarritoCompras(@RequestBody CarritoCompras carritocompras){
+		if(carritocompras.isEstado()) {
+			return new RespuestaDTO<CarritoCompras>(true, "Carrito de compras creado con éxito", carritocomprasService.guardarCarritoCompras(carritocompras));
+		}else {
+			return new RespuestaDTO<CarritoCompras>(false, "El carrito está cerrado y no se pueden agregar productos", null);
+		}
+		
+	}
 }
