@@ -43,14 +43,5 @@ public class CarritoComprasImpl implements ICarritoComprasService {
    		}
    	}
     
-    @Override
-   	public boolean estado(Long id) {
-   		if(id == null) {
-   			return false;
-   		}else {
-   			return carritocomprasRepository.existsById(id);
-   		}
-   	}
-
-    
 }
+    
