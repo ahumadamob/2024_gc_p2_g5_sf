@@ -12,4 +12,5 @@ public interface ICarritoComprasService {
     CarritoCompras obtenerCarritoComprasPorId(Long id);
     void eliminarCarritoCompras(Long id);
     public boolean existe(Long id);
+    public boolean estado (Long id);
 }

@@ -24,6 +24,8 @@ public class CarritoCompras {
     
     private double precioTotal;
     
+    private boolean estado;//nueva propiedad agregada
+    
     //Ejemplos de getters y setters dentro de la clase
     
     public Long getId() {
@@ -65,4 +67,12 @@ public class CarritoCompras {
     public void setPrecioTotal(double precioTotal) {
         this.precioTotal = precioTotal;
     }
+
+	public boolean isEstado() {
+		return estado;
+	}
+
+	public void setEstado(boolean estado) {
+		this.estado = estado;
+	}
 }

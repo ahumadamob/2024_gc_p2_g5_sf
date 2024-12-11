@@ -62,7 +62,7 @@ public class CarritoComprasController {
     
     // Intancia de un objeto, se crea un objeto de tipo CarritoCompras
     //Se crea un nuevo carrito de compras
-    @PostMapping("/carrito")								//Se usa RequestBody para inicializar el objeto automaticamente
+    /*@PostMapping("/carrito")								//Se usa RequestBody para inicializar el objeto automaticamente
     public RespuestaDTO<CarritoCompras> crearCarritoCompras(@RequestBody CarritoCompras carritocompras){
 		if(carritocomprasService.existe(carritocompras.getId())) {
 			return new RespuestaDTO<CarritoCompras>(false, "El ID ingresado ya existe", null);
@@ -70,7 +70,7 @@ public class CarritoComprasController {
 			return new RespuestaDTO<CarritoCompras>(true, "Carrito de compras creado con exito", carritocomprasService.guardarCarritoCompras(carritocompras));
 		}
 		
-	}
+	}*/
 
     //Update de un carrito
     @PutMapping("/carrito")
@@ -89,6 +89,16 @@ public class CarritoComprasController {
 			return new RespuestaDTO<>(true, "Elemento eliminado el ID: " + id.toString(), null);
 		}else {
 			return new RespuestaDTO<>(false, "No se encontró el ID " + id.toString(), null);
+		}
+		
+	}
+     
+    @PostMapping("/carrito/crear") 
+    public RespuestaDTO<CarritoCompras> crearCarritoCompras(@RequestBody CarritoCompras carritocompras){
+		if(carritocomprasService.estado(carritocompras.getId())) {
+			return new RespuestaDTO<CarritoCompras>(false, "El carrito está cerrado y no se pueden agregar productos", null);
+		}else {
+			return new RespuestaDTO<CarritoCompras>(true, "Carrito de compras creado con éxito", carritocomprasService.guardarCarritoCompras(carritocompras));
 		}
 		
 	}
